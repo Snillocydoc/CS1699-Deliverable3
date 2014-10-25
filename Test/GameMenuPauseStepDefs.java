@@ -3,13 +3,13 @@
 
 import cucumber.api.java.en.*;
 
-public class GameMenuStepDefs
+public class GameMenuPauseStepDefs
 {
-	
+	Tetris tetris = new Tetris();
 	@Given("^a Tetris game is running")
 	public void gameIsRunning()
 	{
-		
+		tetris.start();
 	}
 	@Given("^a Tetris game is paused")
 	public void gameIsPaused()

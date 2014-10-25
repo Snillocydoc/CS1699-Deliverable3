@@ -25,10 +25,7 @@ Scenario: Controls are used when game is paused
 Given a Tetris game is running
 When the user selects the "Pause" button
 And presses the up key
+And presses the down key
 And presses the right key
+And presses the left key
 Then nothing should occur
-
-Scenario: User adds level
-Given a Tetris game is running
-When the user selects the "Increase Level" button
-Then the level should increase by 1
