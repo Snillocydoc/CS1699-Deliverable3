@@ -33,7 +33,7 @@ When the user selects the Game menu
 And the user selects the "Jump Level" button
 And the user enters 0
 And the user selects "Ok"
-Then the "Enter Level" window should reappear
+Then the Enter Level window should reappear
 
 Scenario: User adds level higher than possible
 Given a Tetris game is running
@@ -41,5 +41,5 @@ When the user selects the Game menu
 And the user selects the "Jump Level" button
 And the user enters 16
 And the user selects "Ok"
-Then the "Enter Level" window should reappear
+Then the Enter Level window should reappear
 
