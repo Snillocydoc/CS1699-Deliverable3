@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="Test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/home/cody/Downloads/JARS/cucumber-core-1.1.8.jar"/>
+	<classpathentry kind="lib" path="/home/cody/Downloads/JARS/cucumber-core-1.1.8.jar" sourcepath="/home/cody/Downloads/JARS/cucumber-core-1.1.8-sources.jar"/>
 	<classpathentry kind="lib" path="/home/cody/Downloads/JARS/cucumber-core-1.1.8-sources.jar"/>
 	<classpathentry kind="lib" path="/home/cody/Downloads/JARS/cucumber-core-1.1.8-javadoc.jar"/>
 	<classpathentry kind="lib" path="/home/cody/Downloads/JARS/cucumber-junit-1.1.8.jar"/>

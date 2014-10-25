@@ -51,11 +51,7 @@ public class GameMenuPauseStepDefs
 	{
 		assertFalse(tetris.isPaused());
 	}
-	@Then("^nothing should occur")
-	public void nothingOccurs()
-	{
-		
-	}
+	
 	
 	public void setup()
 	{
