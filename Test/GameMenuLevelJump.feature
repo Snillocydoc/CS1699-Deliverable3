@@ -2,8 +2,10 @@ Feature:
 	As a Tetris player
 	I want to be able to jump levels
 	In order to play at varying difficulties
+	
+#Note: The levels range from 1-15
 
-Scenario: User adds level in appropriate (interior) range
+Scenario: User adds level in interior range
 Given a Tetris game is running
 When the user selects the Game menu
 And the user selects the "Jump Level" button
