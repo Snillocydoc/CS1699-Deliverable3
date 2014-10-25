@@ -14,12 +14,3 @@ Given a Tetris game is paused
 When the user selects the Game menu
 And the user selects the "Pause" button
 Then the paused Tetris game should continue
-
-Scenario: Controls are used when game is paused
-Given a Tetris game is running
-When the user selects the "Pause" button
-And presses the up key
-And presses the down key
-And presses the right key
-And presses the left key
-Then nothing should occur

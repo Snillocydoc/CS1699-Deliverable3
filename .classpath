@@ -14,5 +14,10 @@
 	<classpathentry kind="lib" path="/home/cody/Downloads/JARS/cucumber-java-1.1.8-javadoc.jar"/>
 	<classpathentry kind="lib" path="/home/cody/Downloads/JARS/mockito-all-1.9.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/home/cody/Downloads/JARS/gherkin-2.12.2.jar"/>
+	<classpathentry kind="lib" path="/home/cody/Downloads/JARS/gherkin-2.12.2-sources.jar"/>
+	<classpathentry kind="lib" path="/home/cody/Downloads/JARS/gherkin-2.12.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="/home/cody/Downloads/JARS/cucumber-jvm-deps-1.0.3.jar"/>
+	<classpathentry kind="lib" path="/home/cody/Downloads/JARS/cucumber-jvm-deps-1.0.3-javadoc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

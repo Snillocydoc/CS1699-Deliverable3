@@ -376,6 +376,11 @@ public class Tetris extends JPanel
 	{
 		return menu;
 	}
+	//A getter method
+	public boolean isPaused()
+	{
+		return paused;
+	}
 
 	//Turns the about menu on if it is off and off if it is on
 	public void aboutMenu()
