@@ -1,4 +1,4 @@
-Feature: 
+Feature: Level Jump
 	As a Tetris player
 	I want to be able to jump levels
 	In order to play at varying difficulties
