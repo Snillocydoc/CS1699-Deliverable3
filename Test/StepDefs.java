@@ -30,7 +30,7 @@ public class StepDefs
 	int currentSavedIndex=1;
 	
 	
-	@Given("a Tetris game is running$")
+	@Given("a Tetris game is running with initial default statistics$")
 	public void gameIsRunning()
 	{
 		setup();
@@ -41,7 +41,9 @@ public class StepDefs
 	{
 		setup();
 		tetris.start();
+		//change the level
 		tetris.setLevel(3);
+		//change the points
 		tetris.down();
 		tetris.down();
 		

@@ -4,7 +4,7 @@ Feature:
 	In order to take a break and resume gameplay later
 
 Scenario: Press pause during running game
-Given a Tetris game is running
+Given a Tetris game is running with initial default statistics
 When the user selects the Game menu
 And the user selects the "Pause" button
 Then the running Tetris Game should pause
