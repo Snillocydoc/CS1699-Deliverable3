@@ -12,6 +12,7 @@ public class TetrisMenuBar extends JMenuBar
 	private boolean test;
 	private String name;
 	private int levelGLOBAL=-1;
+	private int currentSavedIndex=1;
 	
 	//The constructor
 	public TetrisMenuBar(Tetris tet)
@@ -58,11 +59,19 @@ public class TetrisMenuBar extends JMenuBar
 					while (level<1||level>15)
 					{
 						if(test==false)
-						level=Integer.parseInt(JOptionPane.showInputDialog(null, 
+						{
+							level=Integer.parseInt(JOptionPane.showInputDialog(null, 
 								"Choose a level (1-15)", 
 								"Enter Level", JOptionPane.QUESTION_MESSAGE));
+						}
 						else
+						{
+							
 							level=levelGLOBAL;
+							//for continuity purposes in testing
+							if(level<1||level>15)
+								level=5;
+						}
 						
 					}
 					t.start();
@@ -86,14 +95,21 @@ public class TetrisMenuBar extends JMenuBar
 			{
 				if (!t.isMenu())
 				{
+					String name1;
 					if(test==false)
 					{
-						String name=JOptionPane.showInputDialog(null, "What name would you like to save this game under?\nNote: Your name can be no longer than 10 characters.",
+						name1=JOptionPane.showInputDialog(null, "What name would you like to save this game under?\nNote: Your name can be no longer than 10 characters.",
 							"Tetris", JOptionPane.INFORMATION_MESSAGE);	
 					}
+					else
+					{
+						name1=name;
+					}
 					
-					if (name!=null)
-						t.saveGame(name);
+					
+					if(name1!=null)
+						currentSavedIndex=t.saveGame(name1);
+					
 				}
 			}
 		});
@@ -151,8 +167,12 @@ public class TetrisMenuBar extends JMenuBar
 	{
 		levelGLOBAL=level;
 	}
-	public void setName(String name2)
+	public void setNam(String name2)
 	{
 		name=name2;
+	}
+	public int getCurrentSavedIndex()
+	{
+		return currentSavedIndex;
 	}
 }

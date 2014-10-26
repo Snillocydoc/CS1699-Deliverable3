@@ -439,8 +439,8 @@ public class Tetris extends JPanel
 		return savedGame;
 	}
 
-	//Saves the current game to the array
-	public void saveGame(String name)
+	//Saves the current game to the array and returns its index
+	public int saveGame(String name)
 	{
 		SavedGame[] games=new SavedGame[savedGames.length+1];
 		System.arraycopy(savedGames, 0, games, 0, savedGames.length);
@@ -457,6 +457,7 @@ public class Tetris extends JPanel
 				hold,held,level,linesToGo,new Date());
 		games[games.length-1]=newGame;
 		savedGames=games;
+		return savedGames.length-1;
 	}
 
 	//Saves the savedGames array to the .dat file

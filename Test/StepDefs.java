@@ -2,13 +2,20 @@
 
 
 
+import java.awt.AWTEvent;
+import java.awt.Event;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 import cucumber.api.java.en.*;
+import cucumber.api.java.it.Date;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
 
 
 public class StepDefs
@@ -19,13 +26,25 @@ public class StepDefs
 	TetrisKeyAdapter keyAdapter = new TetrisKeyAdapter(tetris);
 	TetrisWindowAdapter windowAdapter = new TetrisWindowAdapter(tetris);
 	JFrame frame = new JFrame("Tetris");
+	String gameName=new String();
+	int currentSavedIndex=1;
 	
 	
-	@Given("^a Tetris game is running")
+	@Given("a Tetris game is running$")
 	public void gameIsRunning()
 	{
 		setup();
 		tetris.start();
+	}
+	@Given("a Tetris game is running with changed statistics")
+	public void gameWithChangedStats()
+	{
+		setup();
+		tetris.start();
+		tetris.setLevel(3);
+		tetris.down();
+		tetris.down();
+		
 	}
 	@Given("^a Tetris game is paused")
 	public void gameIsPaused()
@@ -41,7 +60,7 @@ public class StepDefs
 		menu.getMenu(0).doClick();
 		
 	}
-	@When("the user selects the \"+(.*)\" button")
+	@When("the user selects the \"+(.*)\" button$")
 	public void selectButton(String name)
 	{
 		System.out.println(name);
@@ -58,15 +77,55 @@ public class StepDefs
 			}
 		}
 	}
-	@When("the user enters d+$")
-	public void enterLevelNumber(String d)
+	@When("^the user selects the Level Jump button and enters (.*)")
+	public void enterLevelNumber(String name)
 	{
-		System.out.println(d);
-		int level = Integer.parseInt(d);
+	
+		int level = Integer.parseInt(name);
 		menu.setLevel(level);
+		int count = menu.getMenu(0).getMenuComponentCount();
+		
+		for(int x=0;x<count;x++)
+		{
+			System.out.println(menu.getMenu(0).getMenuComponent(x));
+			if(menu.getMenu(0).getMenuComponent(x).getAccessibleContext().getAccessibleName()!=null&&menu.getMenu(0).getMenuComponent(x).getAccessibleContext().getAccessibleName().equals("Level Jump"))
+			{
+				menu.getMenu(0).getItem(x).doClick();
+				
+				
+			}
+		}
 		
 	}
+	@When("the user selects the Save Game button and enters \"(.*)\"")
+	public void userEnters(String nam)
+	{
+		menu.setNam(nam);
+		gameName=nam;
+		int count = menu.getMenu(0).getMenuComponentCount();
+		System.out.println(nam);
+		for(int x=0;x<count;x++)
+		{
+			
+			if(menu.getMenu(0).getMenuComponent(x).getAccessibleContext().getAccessibleName()!=null&&menu.getMenu(0).getMenuComponent(x).getAccessibleContext().getAccessibleName().equals("Save Game"))
+			{
+				menu.getMenu(0).getItem(x).doClick();
+				
+			}
+		}
+	}
 	
+	@Then("the level should be (.*)")
+	public void levelShouldBe(String num)
+	{
+		int level = Integer.parseInt(num);
+		assertEquals(level,tetris.getLevel());
+	}
+	@Then("the Enter Level window should reappear")
+	public void enterLevel()
+	{
+		assertEquals(tetris.getLevel(),5);
+	}
 	@Then("^a new game with the initial default statistics should begin")
 	public void beginNewGame()
 	{
@@ -88,6 +147,47 @@ public class StepDefs
 	{
 		assertTrue(tetris.isMenu());
 	}
+	@Then("the data file should be updated with the \"(.*)\" statistics$")
+	public void correctStatistics(String state)
+	{
+		
+		if(state.equals("initial"))
+		{
+			currentSavedIndex=menu.getCurrentSavedIndex();
+			SavedGame[] games = tetris.getSavedGames();
+			for(int x=0;x<games.length;x++)
+				System.out.println(games[x].getName());
+			System.out.println(currentSavedIndex);
+			assertTrue(games[currentSavedIndex].getPoints()==0
+					&&games[currentSavedIndex].getLevel()==1
+					&&gameName.startsWith(games[currentSavedIndex].getName()));
+			
+			
+			
+		}
+		else if(state.equals("changed"))
+		{
+			currentSavedIndex=menu.getCurrentSavedIndex();
+			SavedGame[] games = tetris.getSavedGames();
+			for(int x=0;x<games.length;x++)
+				System.out.println(games[x].getName());
+			System.out.println(currentSavedIndex);
+			assertTrue(games[currentSavedIndex].getPoints()>0
+					&&games[currentSavedIndex].getLevel()>1
+					&&gameName.startsWith(games[currentSavedIndex].getName()));
+		
+				
+		
+		}
+	}
+	@Then("the name should be \"(.*)\"$")
+	public void nameShouldBe(String nam)
+	{
+		currentSavedIndex=menu.getCurrentSavedIndex();
+		SavedGame[] games = tetris.getSavedGames();
+		assertEquals(nam,games[currentSavedIndex].getName());
+	}
+	
 	
 	
 	public void setup()
