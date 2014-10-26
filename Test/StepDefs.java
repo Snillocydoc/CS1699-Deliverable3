@@ -52,23 +52,41 @@ public class StepDefs
 			System.out.println(menu.getMenu(0).getMenuComponent(x));
 			if(menu.getMenu(0).getMenuComponent(x).getAccessibleContext().getAccessibleName()!=null&&menu.getMenu(0).getMenuComponent(x).getAccessibleContext().getAccessibleName().equals(name))
 			{
-				System.out.println("ITS NULL");
+				menu.getMenu(0).getItem(x).doClick();
 				
 				
 			}
 		}
 	}
+	@When("the user enters d+$")
+	public void enterLevelNumber(String d)
+	{
+		System.out.println(d);
+		int level = Integer.parseInt(d);
+		menu.setLevel(level);
+		
+	}
 	
-	
-	@Then("^the running Tetris game should pause")
+	@Then("^a new game with the initial default statistics should begin")
+	public void beginNewGame()
+	{
+		assertTrue(tetris.isInGame());
+		assertTrue(tetris.getLevel()==1);
+	}
+	@Then("the running Tetris game should pause")
 	public void gamePauses()
 	{
 		assertTrue(tetris.isPaused());
 	}
-	@Then("^the paused Tetris game should continue")
+	@Then("the paused Tetris game should continue")
 	public void gameContinues()
 	{
 		assertFalse(tetris.isPaused());
+	}
+	@Then("the application should return to the main menu page")
+	public void returnMainMenu()
+	{
+		assertTrue(tetris.isMenu());
 	}
 	
 	
@@ -85,6 +103,7 @@ public class StepDefs
 		frame.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-tetris.getWidth()/2,2);
 		//Shows the frame
 		frame.setVisible(true);
+		menu.setTest(true);
 	}
 	
 }

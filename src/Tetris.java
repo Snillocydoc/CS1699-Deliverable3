@@ -174,6 +174,10 @@ public class Tetris extends JPanel
 		level=level2;
 		t.setDelay(400-level*25);
 	}
+	public int getLevel()
+	{
+		return level;
+	}
 
 	//What happens when the down key is pressed
 	public void down()
