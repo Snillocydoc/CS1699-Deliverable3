@@ -129,7 +129,7 @@ public class StepDefs
 		assertTrue(tetris.isInGame());
 		assertTrue(tetris.getLevel()==1);
 	}
-	@Then("^the running Tetris Game should pause")
+	@Then("^the running Tetris game should pause")
 	public void gamePauses()
 	{
 		assertTrue(tetris.isPaused());
