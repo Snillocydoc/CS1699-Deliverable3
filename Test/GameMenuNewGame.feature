@@ -1,4 +1,4 @@
-Feature:
+Feature: New Game
 	As a Tetris player
 	I want to be able to start a new game
 	In order to begin a brand new game with the initial default statistics

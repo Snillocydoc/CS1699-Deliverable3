@@ -1,4 +1,4 @@
-Feature:
+Feature: Save
 	As a Tetris player
 	I want to be able to save my game
 	In order to stop the game and return later

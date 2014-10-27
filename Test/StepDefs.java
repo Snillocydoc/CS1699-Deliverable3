@@ -1,7 +1,3 @@
-
-
-
-
 import java.awt.AWTEvent;
 import java.awt.Event;
 import java.awt.Toolkit;
@@ -12,23 +8,22 @@ import javax.swing.*;
 
 import cucumber.api.java.en.*;
 import cucumber.api.java.it.Date;
+import cucumber.api.junit.Cucumber;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 
-
 public class StepDefs
 {
 
-	Tetris tetris = new Tetris();
-	TetrisMenuBar menu = new TetrisMenuBar(tetris);
-	TetrisKeyAdapter keyAdapter = new TetrisKeyAdapter(tetris);
-	TetrisWindowAdapter windowAdapter = new TetrisWindowAdapter(tetris);
-	JFrame frame = new JFrame("Tetris");
-	String gameName=new String();
-	int currentSavedIndex=1;
-	
+	Tetris tetris;
+	TetrisMenuBar menu;
+	TetrisKeyAdapter keyAdapter;
+	TetrisWindowAdapter windowAdapter;
+	JFrame frame;
+	String gameName;
+	int currentSavedIndex;
 	
 	@Given("a Tetris game is running with initial default statistics$")
 	public void gameIsRunning()
@@ -80,10 +75,10 @@ public class StepDefs
 		}
 	}
 	@When("^the user selects the Level Jump button and enters (.*)")
-	public void enterLevelNumber(String name)
+	public void enterLevelNumber(String lvl)
 	{
 	
-		int level = Integer.parseInt(name);
+		int level = Integer.parseInt(lvl);
 		menu.setLevel(level);
 		int count = menu.getMenu(0).getMenuComponentCount();
 		
@@ -118,9 +113,9 @@ public class StepDefs
 	}
 	
 	@Then("the level should be (.*)")
-	public void levelShouldBe(String num)
+	public void levelShouldBe(String lvl)
 	{
-		int level = Integer.parseInt(num);
+		int level = Integer.parseInt(lvl);
 		assertEquals(level,tetris.getLevel());
 	}
 	@Then("the Enter Level window should reappear")
@@ -183,17 +178,26 @@ public class StepDefs
 		}
 	}
 	@Then("the name should be \"(.*)\"$")
-	public void nameShouldBe(String nam)
+	public void nameShouldBe(String name)
 	{
 		currentSavedIndex=menu.getCurrentSavedIndex();
 		SavedGame[] games = tetris.getSavedGames();
-		assertEquals(nam,games[currentSavedIndex].getName());
+		assertEquals(name,games[currentSavedIndex].getName());
 	}
 	
 	
 	
 	public void setup()
 	{
+		// Reset
+		tetris = new Tetris();
+		menu = new TetrisMenuBar(tetris);
+		keyAdapter = new TetrisKeyAdapter(tetris);
+		windowAdapter = new TetrisWindowAdapter(tetris);
+		frame = new JFrame("Tetris");
+		gameName=new String();
+		currentSavedIndex=1;
+		
 		frame.add(tetris);
 		//Set the properties of the frame
 		frame.addWindowListener(windowAdapter);
@@ -206,6 +210,14 @@ public class StepDefs
 		//Shows the frame
 		frame.setVisible(true);
 		menu.setTest(true);
+		
+		// Wait 100ms to make sure the frame/menu has the time it needs to initialize
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
