@@ -211,13 +211,7 @@ public class StepDefs
 		frame.setVisible(true);
 		menu.setTest(true);
 		
-		// Wait 100ms to make sure the frame/menu has the time it needs to initialize
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 	
 }
